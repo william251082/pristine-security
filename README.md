@@ -2,11 +2,11 @@
 _Configuring a Linux server to host a web app securely._
 
 # Server details
-IP address: ~~`18.194.136.3`~~
+IP address: `18.194.136.3`
 
 SSH port: `2200`
 
-URL: ~~`http://ec2-52-11-206-40.us-west-2.compute.amazonaws.com`~~
+URL:
 
 
 # Configuration changes
@@ -181,6 +181,6 @@ The `www-data` user will be used to run the catalog app.
 ```
 cd /srv
 sudo mkdir fullstack-nanodegree-vm
-sudo chown www-data:www-data fullstack-nanodegree-vm/
-sudo -u www-data git clone https://github.com/SteveWooding/fullstack-nanodegree-vm.git fullstack-nanodegree-vm
+sudo chown www-data:www-data FavApps/
+sudo -u www-data git clone https://github.com/william251082/FavApps.git FavApps
 ```
