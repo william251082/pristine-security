@@ -2,11 +2,11 @@
 _Configuring a Linux server to host a web app securely._
 
 # Server details
-IP address: `18.194.136.3`
+IP address: ~~`18.194.136.3`~~
 
 SSH port: `2200`
 
-URL:
+URL: ~~`http://ec2-52-11-206-40.us-west-2.compute.amazonaws.com`~~
 
 
 # Configuration changes
@@ -59,6 +59,7 @@ to server and save it:
 ``` nano .ssh/authorized_keys
     chmod 700 .ssh
     chmod 644 .ssh/authorized_keys
+```
 
 Can now login as the `grader` user using the command:
 `ssh grader@18.194.136.3 -p 2200 -i .ssh/linuxCourse`
