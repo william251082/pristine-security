@@ -2,11 +2,11 @@
 _Configuring a Linux server to host a web app securely._
 
 # Server details
-IP address: ~~`18.194.136.3`~~
+IP address: `18.194.136.3`
 
 SSH port: `2200`
 
-URL: ~~`http://ec2-52-11-206-40.us-west-2.compute.amazonaws.com`~~
+URL: 
 
 
 # Configuration changes
@@ -97,7 +97,7 @@ Then restart the SSH service:
 
 Will now need to use the following command to login to the server:
 
-`ssh -i ~/.ssh/udacity_key.rsa grader@52.11.206.40 -p 2200`
+`ssh grader@18.194.136.3 -p 2200 -i .ssh/linuxCourse`
 
 ## Configuration Uncomplicated Firewall (UFW)
 By default, block all incoming connections on all ports:
