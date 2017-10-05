@@ -1,6 +1,186 @@
-# LinuxSeverConfig
+# Linux Server Configuration
+_Configuring a Linux server to host a web app securely._
 
-i. The IP address and SSH port so your server can be accessed by the reviewer.
-ii. The complete URL to your hosted web application.
-iii. A summary of software you installed and configuration changes made.
-iv. A list of any third-party resources you made use of to complete this project.
+# Server details
+IP address: ~~`18.194.136.3`~~
+
+SSH port: `2200`
+
+URL: ~~`http://ec2-52-11-206-40.us-west-2.compute.amazonaws.com`~~
+
+
+# Configuration changes
+## Add user
+Add user `grader` with command: `sudo adduser grader`
+password: grader
+
+## Check for `grader` info
+`finger grader`
+
+## Update all currently installed packages
+
+`apt-get update` - to update the package indexes
+
+`apt-get upgrade` - to actually upgrade the installed packages
+
+If at login the message `*** System restart required ***` is display, run the followingOnt
+command to reboot the machine:
+
+`reboot`
+
+## Set-up SSH keys for user grader
+As root user do:
+```
+sudo cat /etc/sudoers
+sudo ls /etc/sudoers.d
+```
+Give sudo access to grader:
+```
+sudo cat /etc/sudoers
+sudo cp /etc/sudoers.d/vagrant /ect/sudoers.d/student
+sudo nano /etc/sudoers.d/student
+```
+Change the word vagrant to student
+
+On the local machine, generate key pair:
+ssh keygen
+/Users/williamdelrosario/.ssh/linuxCourse
+There's no passphrase, just press the return key
+
+
+As root user do:
+``` mkdir .ssh
+    touch .ssh/authorized_keys
+```
+On local machine, copy the text in this command
+`cat .ssh/linuxCourse.pub`
+
+to server and save it:
+``` nano .ssh/authorized_keys
+    chmod 700 .ssh
+    chmod 644 .ssh/authorized_keys
+
+Can now login as the `grader` user using the command:
+`ssh grader@18.194.136.3 -p 2200 -i .ssh/linuxCourse`
+
+
+
+## Disable root login
+Change the following line in the file `/etc/ssh/sshd_config`:
+
+From `PermitRootLogin without-password` to `PermitRootLogin no`.
+
+Also, uncomment the following line so it reads:
+```
+PasswordAuthentication no
+```
+
+Do `service ssh restart` for the changes to take effect.
+
+Will now do all commands using the `grader` user, using `sudo` when required.
+
+## Change timezone to UTC
+Check the timezone with the `date` command. This will display the current timezone after the time.
+If it's not UTC change it like this:
+
+`sudo timedatectl set-timezone UTC`
+
+## Change SSH port from 22 to 2200
+Edit the file `/etc/ssh/sshd_config` and change the line `Port 22` to:
+
+`Port 2200`
+
+Then restart the SSH service:
+
+`sudo service ssh restart`
+
+Will now need to use the following command to login to the server:
+
+`ssh -i ~/.ssh/udacity_key.rsa grader@52.11.206.40 -p 2200`
+
+## Configuration Uncomplicated Firewall (UFW)
+By default, block all incoming connections on all ports:
+
+`sudo ufw default deny incoming`
+
+Allow outgoing connection on all ports:
+
+`sudo ufw default allow outgoing`
+
+Allow incoming connection for SSH on port 2200:
+
+`sudo ufw allow 2200/tcp`
+
+Allow incoming connections for HTTP on port 80:
+
+`sudo ufw allow www`
+
+Allow incoming connection for NTP on port 123:
+
+`sudo ufw allow ntp`
+
+To check the rules that have been added before enabling the firewall use:
+
+`sudo ufw show added`
+
+To enable the firewall, use:
+
+`sudo ufw enable`
+
+To check the status of the firewall, use:
+
+`sudo ufw status`
+
+## Install Apache to serve a Python mod_wsgi application
+Install Apache:
+
+`sudo apt-get install apache2`
+
+Install the `libapache2-mod-wsgi` package:
+
+`sudo apt-get install libapache2-mod-wsgi`
+
+## Install and configure PostgreSQL
+Install PostgreSQL with:
+
+`sudo apt-get install postgresql postgresql-contrib`
+
+Create a PostgreSQL user called `catalog` with:
+
+`sudo -u postgres createuser -P catalog`
+
+You are prompted for a password. This creates a normal user that can't create
+databases, roles (users).
+
+Create an empty database called `catalog` with:
+
+`sudo -u postgres createdb -O catalog catalog`
+
+The Ubuntu documentation page on [PostgreSQL][3] was helpful.
+
+## Install Flask, SQLAlchemy, etc
+Issue the following commands:
+```
+sudo apt-get install python-psycopg2 python-flask
+sudo apt-get install python-sqlalchemy python-pip
+sudo pip install oauth2client
+sudo pip install requests
+sudo pip install httplib2
+sudo pip install flask-seasurf
+```
+
+An alternative to installing system-wide python modules is to create a virtual
+environment for each application using the [virualenv][4] package.
+
+## Install Git version control software
+`sudo apt-get install git`
+
+## Clone the repository that contains Project 3 Catalog app
+Move to the `/srv` directory and clone the repository as the `www-data` user.
+The `www-data` user will be used to run the catalog app.
+```
+cd /srv
+sudo mkdir fullstack-nanodegree-vm
+sudo chown www-data:www-data fullstack-nanodegree-vm/
+sudo -u www-data git clone https://github.com/SteveWooding/fullstack-nanodegree-vm.git fullstack-nanodegree-vm
+```
