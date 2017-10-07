@@ -157,7 +157,6 @@ Create an empty database called `catalog` with:
 
 `sudo -u postgres createdb -O catalog catalog`
 
-The Ubuntu documentation page on [PostgreSQL][3] was helpful.
 
 ## Install Flask, SQLAlchemy, etc
 Issue the following commands:
@@ -181,7 +180,7 @@ Move to the `/srv` directory and clone the repository as the `www-data` user.
 The `www-data` user will be used to run the catalog app.
 ```
 cd /srv
-sudo mkdir fullstack-nanodegree-vm
+sudo mkdir F
 sudo chown www-data:www-data FavApps/
 sudo -u www-data git clone https://github.com/william251082/FavApps.git FavApps
 ```
