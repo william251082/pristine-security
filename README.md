@@ -207,10 +207,13 @@ Create a ```FavApps.conf``` file using this command:
 
 Disable 000-default.conf file in /etc/apache2/sites-available.
 ```sudo a2dissite 000-default.conf```
+
 Enable GameZone.conf file in /etc/apache2/sites-available.
 ```sudo a2ensite FavApps.conf```
+
 Restart apache2 server with
 ```sudo service apache2 restart```
+
 Create catalog.wsgi file inside FavApps.
 ```
 #!/usr/bin/python
@@ -222,9 +225,11 @@ sys.path.insert(0,"/srv/FavApps/")
 from FavApps import app as application
 application.secret_key = ‘SECRET KEY’
 ```
+
 Update the permissions for the uploads folder to enable read and write.
 ```chmod 777 /srv/FavApps/```
 ```chown grader:grader /srv/FavApps/```
+
 Restart the apache2 server.
 ```sudo service apache2 restart```
 
