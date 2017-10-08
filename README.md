@@ -180,7 +180,53 @@ Move to the `/srv` directory and clone the repository as the `www-data` user.
 The `www-data` user will be used to run the catalog app.
 ```
 cd /srv
-sudo mkdir F
-sudo chown www-data:www-data FavApps/
-sudo -u www-data git clone https://github.com/william251082/FavApps.git FavApps
+sudo mkdir FavApps
+sudo chown grader:grader FavApps/
+sudo -u grader git clone https://github.com/william251082/FavApps.git FavApps
 ```
+On ```/srv/FavApps$```
+Create a ```FavApps.conf``` file using this command:
+```sudo nano /etc/apache2/sites-available/FavApps.conf```
+
+```
+<VirtualHost *:80>
+                ServerAdmin admin@mywebsite.com
+                WSGIScriptAlias / /srv/FavApps/FavApps.wsgi
+                <Directory /srv/FavApps>
+                        Require all granted
+                </Directory>
+                Alias /static /srv/FavApps/static
+                <Directory /srv/FavApps/static/>
+                        Require all granted
+                </Directory>
+                ErrorLog ${APACHE_LOG_DIR}/error.log
+                LogLevel warn
+                CustomLog ${APACHE_LOG_DIR}/access.log combined
+</VirtualHost>
+```
+
+Disable 000-default.conf file in /etc/apache2/sites-available.
+```sudo a2dissite 000-default.conf```
+Enable GameZone.conf file in /etc/apache2/sites-available.
+```sudo a2ensite FavApps.conf```
+Restart apache2 server with
+```sudo service apache2 restart```
+Create catalog.wsgi file inside FavApps.
+```
+#!/usr/bin/python
+import sys
+import logging
+logging.basicConfig(stream=sys.stderr)
+sys.path.insert(0,"/srv/FavApps/")
+
+from FavApps import app as application
+application.secret_key = ‘SECRET KEY’
+```
+Update the permissions for the uploads folder to enable read and write.
+```chmod 777 /srv/FavApps/```
+```chown grader:grader /srv/FavApps/```
+Restart the apache2 server.
+```sudo service apache2 restart```
+
+
+
