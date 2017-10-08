@@ -227,10 +227,13 @@ application.secret_key = ‘SECRET KEY’
 ```
 
 Update the permissions for the uploads folder to enable read and write.
+
 ```chmod 777 /srv/FavApps/```
+
 ```chown grader:grader /srv/FavApps/```
 
 Restart the apache2 server.
+
 ```sudo service apache2 restart```
 
 
