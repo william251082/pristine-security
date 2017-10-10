@@ -250,11 +250,14 @@ Edit the lines of these files
 
 
 From 
+
 ```engine = create_engine('sqlite:///appmakerinfowithusers.db')```
 
 To
+
 ```engine = create_engine('postgresql://catalog:catalog@localhost/catalog')
 Base.metadata.bind = engine```
+
 
 ## Change the PostgreSql's password
 
