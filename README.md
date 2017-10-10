@@ -6,7 +6,7 @@ IP address: `18.194.136.3`
 
 SSH port: `2200`
 
-URL: 
+URL: http://18.194.136.3
 
 
 # Configuration changes
@@ -207,11 +207,17 @@ Create a ```FavApps.conf``` file using this command:
 
 Disable 000-default.conf file in /etc/apache2/sites-available.
 ```sudo a2dissite 000-default.conf```
-Enable GameZone.conf file in /etc/apache2/sites-available.
+
+
+Enable FavApps.conf file in /etc/apache2/sites-available.
 ```sudo a2ensite FavApps.conf```
+
+
 Restart apache2 server with
 ```sudo service apache2 restart```
-Create catalog.wsgi file inside FavApps.
+
+
+Create FavApps.wsgi file inside FavApps.
 ```
 #!/usr/bin/python
 import sys
@@ -222,11 +228,60 @@ sys.path.insert(0,"/srv/FavApps/")
 from FavApps import app as application
 application.secret_key = ‘SECRET KEY’
 ```
+
 Update the permissions for the uploads folder to enable read and write.
 ```chmod 777 /srv/FavApps/```
 ```chown grader:grader /srv/FavApps/```
+
+
 Restart the apache2 server.
 ```sudo service apache2 restart```
+
+Check for errors
+```sudo tail /var/log/apache2/error.log```
+
+## Edit and run the files using sglite to PostgreSql
+
+Edit the linnes of these files
+
+```/srv/FavApps$ sudo nano database_setup.py```
+```/srv/FavApps$ sudo nano finalProject.py```
+```/srv/FavApps$ sudo nano lotsofapps.py```
+
+
+From 
+```engine = create_engine('sqlite:///appmakerinfowithusers.db')```
+
+To
+```engine = create_engine('postgresql://catalog:catalog@localhost/catalog')
+Base.metadata.bind = engine```
+
+## Change the PostgreSql's password
+
+```/srv/FavApps$ sudo -u postgres psql```
+
+```
+psql (9.5.9)
+Type "help" for help.
+
+postgres=# \du
+postgres=# alter role catalog with password 'catalog';
+ALTER ROLE
+```
+Check Database
+```
+postgres=# \l
+postgres=# \q
+```
+
+## Edit JSON and FavaApps.wsgi files' path to ```/srv/FavApps```
+
+```/srv/FavApps$ sudo nano client_secrets.json```
+```/srv/FavApps$ sudo nano FavApps.wsgi```
+
+```sudo service apache2 restart```
+
+
 
 
 
