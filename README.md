@@ -268,7 +268,9 @@ postgres=# \du
 postgres=# alter role catalog with password 'catalog';
 ALTER ROLE
 ```
+
 Check Database
+
 ```
 postgres=# \l
 postgres=# \q
