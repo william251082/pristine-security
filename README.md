@@ -265,7 +265,7 @@ Base.metadata.bind = engine
 ```
 
 
-## Change the PostgreSql's password
+## Change PostgreSql database password
 
 ```
 /srv/FavApps$ sudo -u postgres psql
