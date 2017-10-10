@@ -240,9 +240,9 @@ Restart the apache2 server.
 Check for errors
 ```sudo tail /var/log/apache2/error.log```
 
-## Edit and run the files using sglite to PostgreSql
+## Edit and run the files using sqlite to PostgreSql
 
-Edit the linnes of these files
+Edit the lines of these files
 
 ```/srv/FavApps$ sudo nano database_setup.py```
 ```/srv/FavApps$ sudo nano finalProject.py```
