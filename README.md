@@ -251,17 +251,23 @@ Edit the lines of these files
 
 From 
 
-```engine = create_engine('sqlite:///appmakerinfowithusers.db')```
+```
+engine = create_engine('sqlite:///appmakerinfowithusers.db')
+```
 
 To
 
-```engine = create_engine('postgresql://catalog:catalog@localhost/catalog')
-Base.metadata.bind = engine```
+```
+engine = create_engine('postgresql://catalog:catalog@localhost/catalog')
+Base.metadata.bind = engine
+```
 
 
 ## Change the PostgreSql's password
 
-```/srv/FavApps$ sudo -u postgres psql```
+```
+/srv/FavApps$ sudo -u postgres psql
+```
 
 ```
 psql (9.5.9)
@@ -281,8 +287,11 @@ postgres=# \q
 
 ## Edit JSON and FavaApps.wsgi files' path to ```/srv/FavApps```
 
+
 ```/srv/FavApps$ sudo nano client_secrets.json```
+
 ```/srv/FavApps$ sudo nano FavApps.wsgi```
+
 
 ```sudo service apache2 restart```
 
