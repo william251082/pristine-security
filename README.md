@@ -245,7 +245,9 @@ Check for errors
 Edit the lines of these files
 
 ```/srv/FavApps$ sudo nano database_setup.py```
+
 ```/srv/FavApps$ sudo nano finalProject.py```
+
 ```/srv/FavApps$ sudo nano lotsofapps.py```
 
 
