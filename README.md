@@ -299,5 +299,12 @@ postgres=# \q
 
 
 
-
+  ## References
+  
+  1. [Amazon Lightsail](https://lightsail.aws.amazon.com)
+  2. [Structure Large Flask Applications](https://www.digitalocean.com/community/tutorials/how-to-structure-large-flask-applications)
+  3. [Apache Configuration Files](https://httpd.apache.org/docs/2.2/configuring.html)
+  4. [PostgreSQL Server Installation and Configuration](http://openobject-documentation.readthedocs.io/en/latest/1/linux/postgres/index.html)
+  5. [How To Deploy a Flask Application on an Ubuntu VPS](https://www.digitalocean.com/community/tutorials/how-to-deploy-a-flask-application-on-an-ubuntu-vps)
+  6. [Website not loading - Apache conf problems](https://www.digitalocean.com/community/questions/website-not-loading-apache-conf-problems)
 
