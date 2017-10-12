@@ -304,9 +304,11 @@ postgres=# \q
 
 ```sudo apt autoremove```
 
+```sudo apt-get update && sudo apt-get upgrade```
 
 
-## Deny all ports except 2200
+
+## Only allow connections for SSH (port 2200), HTTP (port 80), and NTP (port 123)
 
 ```sudo ufw status```
 
