@@ -306,6 +306,15 @@ postgres=# \q
 
 
 
+## Deny all ports except 2200
+
+```sudo ufw status```
+
+```sudo ufw deny``` ports to close/deny 
+
+
+
+
   ## References
   
   1. [Amazon Lightsail](https://lightsail.aws.amazon.com)
