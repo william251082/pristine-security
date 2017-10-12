@@ -298,6 +298,13 @@ postgres=# \q
 ```sudo service apache2 restart```
 
 
+## Update packages to the latest versions
+
+```sudo apt install unattended-upgrades```
+
+```sudo apt autoremove```
+
+
 
   ## References
   
